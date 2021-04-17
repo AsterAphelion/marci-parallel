@@ -5,7 +5,7 @@ Parallelized processing pipeline for Mars Color Imager (MARCI) data.
 
 - [ISIS3 installation](https://github.com/USGS-Astrogeology/ISIS3/blob/dev/README.md) with MRO SPICE Kernels downloaded
 - [GNU Parallel package](https://www.gnu.org/software/parallel/)
-- Python conda environment with [Rasterio](https://rasterio.readthedocs.io/en/latest/)
+- Python conda environment with [Rasterio](https://rasterio.readthedocs.io/en/latest/) (setup provided in requirements.txt)
 - Lots of RAM (MARCI images are LARGE)
 
 ## Script Setup
