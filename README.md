@@ -8,6 +8,9 @@ Parallelized processing pipeline for Mars Color Imager (MARCI) data.
 - Python conda environment with [Rasterio](https://rasterio.readthedocs.io/en/latest/)
 - Lots of RAM (MARCI images are LARGE)
 
+## Script Setup
+This script needs to flip between running in a conda environment dedicated to ISIS and a separate environment for Python image processing. To do this you will need to change the path to the location of your conda startup script. I named the conda environments for ISIS3 and Python processing as 'isis' and 'images', respectively. If your conda environments are named differently, do a find and replace on these terms and change to match your conda environments for these tasks.
+
 ## Description
 This is a shell script to process [Mars Color Imager](http://www.msss.com/all_projects/mro-marci.php) (MARCI) data from NASA's Planetary Data System using ISIS3. The input is a MARCI .IMG file name (discard the file extension), and the outputs are 16-bit RGB .TIF files with the data in equirectangular global projection, and polar stereographic projection between latitude 60 and 90 for both north and south poles. MARCI has 5 bands in the VIS range; this script uses bands 1, 2, and 4, which correspond to the instrument's 425 nm, 550 nm, and 650 nm imaging channels.
 
@@ -26,7 +29,6 @@ At the 'crop' stage, change [.cub+#]. The numbers correspond to the following ch
 - 3: 600 nm
 - 4: 650 nm
 - 5: 725 nm
-
 
 ## Future improvements (?)
 
