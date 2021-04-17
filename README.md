@@ -32,8 +32,12 @@ At the 'crop' stage, change [.cub+#]. The numbers correspond to the following ch
 
 ## Future improvements (?)
 
-In the future this code may be improved in the following ways.
+Here are some improvements I'd like to make to the pipeline. I am not sure that I can address these, but feel free to contact me if you have an approach that works. 
 
-- **Improved null pixel correction** - Saturated pixels roll over to a DN value of 0. During image decompanding, these values are convolved with surrounding pixels, leading to large areas of dark, but non-0 DN values. These are difficult to filter and I am still experimenting with a way to handle these more accurately. 
+- **Photometric Correction for Opposition Effect** - Due to the slightly different look angle of each color channel, the opposition surge associated with the anti-solar point is spread out as a rainbow-colored streak. This can be reduced with a photometric correction algorithm in ISIS3, but requires more knowledge of photometric modeling than I currently have.
+
+- **Oversaturated pixel correction** - Oversaturated pixels roll over to a DN value of 0. During image decompanding, these values are convolved with surrounding pixels, leading to large areas of dark, but non-0 DN values. These are difficult to filter and I am still experimenting with a way to handle these more accurately. 
 
 - **Improved band merging** - MARCI is a pushframe imager, and because it is imaging the surface over a wide range of lighting conditions, small brightness gradients are typically present within each subframe. When these subframes are mosaicked together, they typically place a bright pixel on one subframe adjacent to a darker pixel in the next subframe to produce a barcode effect. The current Python script handles frame merging by averaging, which somewhat reduces the barcode effect, but it is still visible, especially when contrast enhancements are applied to the image. 
+
+- **Automated SPICE Kernel smithing** - Small differences between the calculated and actual spacecraft orientation produce increasing geographic misalignment of color data away from nadir imaging. This might be addressable by measuring misalignment of these features and adjusting the pointing data accordingly. 
