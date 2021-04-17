@@ -62,33 +62,8 @@ for i in range(b.shape[0]):
         noise_det = noise_det - med_filter
         lines = lines - noise_det
 
-        #Extra step to handle dark lines that appear along the image edge, which I think come from how the filter
-        #interacts when MRO rolls off-nadir for imaging purposes. 
-        #roll_pos = np.roll(lines, 1, axis=1)
-        #roll_neg = np.roll(lines, -1, axis=1)
-        #noise_min = ((roll_pos + roll_neg)/2) * 0.90
-        #noise_max = ((roll_pos + roll_neg)/2) * 1.10
-        #inds = np.where((lines < noise_min) | (lines > noise_max))
-        #for ind_1, ind_2 in zip(inds[0], inds[1] ):
-        #    lines[ind_1, ind_2] = ((roll_pos[ind_1, ind_2] + roll_neg[ind_1, ind_2]) / 2)
         working_copy[j::framelet_size, null_left+crop:null_right-crop] = lines
     
-    
-    #This part seems to be causing more trouble than it's worth 
-
-    #Row bias and gradient removal. Technique: pull subframe, average all pixels in a row, then subtract the median
-    #valule to catch row noise.
-    #for j in range(num_subframes):
-        
-    #    size = working_copy[j*framelet_size:((j*framelet_size)+framelet_data), null_left:null_right]
-    #    size = size.shape[1]
-    
-    #    noise_det = np.average(working_copy[j*framelet_size:((j*framelet_size)+framelet_data), null_left:null_right], axis=1)
-    #    med_filter = ndi.median_filter(noise_det, size=9, mode='wrap')
-    #    noise_det = noise_det - med_filter
-    #    noise_det = noise_det[:, np.newaxis]
-    #    noise_det = np.tile(noise_det, (1, size))
-    #    working_copy[j*framelet_size:((j*framelet_size)+framelet_data), null_left:null_right] = working_copy[j*framelet_size:((j*framelet_size)+framelet_data), null_left:null_right] - noise_det
         
     c[i, start:finish] = working_copy
 
@@ -96,5 +71,4 @@ for i in range(c.shape[0]):
     a.write(c[i], i+1)
 
 a.close()
-
 
